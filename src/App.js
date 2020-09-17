@@ -14,8 +14,14 @@ class App extends Component{
       xIsNext: true,
       historyO: [],
       historyX: [],
-      clickCounter: 9
+      clickCounter: 9,
+      winner: null
     }
+  }
+
+  handleChange = (index) => {
+    this.marker(index)
+    this.winChecker(index)
   }
 
   marker = (index) =>{
@@ -39,7 +45,9 @@ class App extends Component{
     this.setState({ squareArray: squareArray})
     this.setState({ xIsNext: xIsNext})
   }
+  
   winChecker = (index) =>{
+    let { historyX, historyO, clickCounter } = this.state
     const winArrays = [
     [0, 1, 2],
     [3, 4, 5],
@@ -50,12 +58,34 @@ class App extends Component{
     [0, 4, 8],
     [2, 4, 6],
     ]
-    let winningCombo = winArrays.map(array => {
-      
+    let winningArray = winArrays.map(value => {
+      //iterate through and check if either history includes the array
+      const [a, b, c] = value
+      if(historyX.includes(a) && historyX.includes(b) && historyX.includes(c)){
+        let winner = true
+        this.setState({ winner: winner})
+        setTimeout(function () {
+          alert("X's Win!!")
+       }, 350)
+      } else if(historyO.includes(a) && historyO.includes(b) && historyO.includes(c)){
+        let winner = true
+        this.setState({ winner: winner})
+        setTimeout(function () {
+          alert("O's Win!!")
+       }, 350)
+      }
     })
   }
 
+  drawChecker = () => {
+    let { clickCounter } = this.state
+    if(clickCounter === 0){
+      
+    }
+  }
 
+
+  // Restart page functionality
   restartButton = () =>{
     window.location.reload()
   }
@@ -68,7 +98,7 @@ class App extends Component{
           box = { box }
           index = { index }
           key = { index }
-          marker = { this.marker }
+          handleChange = { this.handleChange }
         />
       )
     })
