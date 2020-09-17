@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import Square from './components/Square'
 import Restart from './components/Restart'
-import Counter from './components/Counter'
-
-
 import './App.css'
 
 class App extends Component{
@@ -14,8 +11,8 @@ class App extends Component{
       xIsNext: true,
       historyO: [],
       historyX: [],
-      clickCounter: 9,
-      winner: null
+      winner: null,
+      winMessage: null
     }
   }
 
@@ -39,15 +36,12 @@ class App extends Component{
         console.log("This is O history", historyO);
       }
     }
-    clickCounter -= 1
-    this.setState({clickCounter: clickCounter})
-      console.log(clickCounter);
     this.setState({ squareArray: squareArray})
     this.setState({ xIsNext: xIsNext})
   }
   
   winChecker = (index) =>{
-    let { historyX, historyO, clickCounter } = this.state
+    let { historyX, historyO, winMessage, winner, squareArray } = this.state
     const winArrays = [
     [0, 1, 2],
     [3, 4, 5],
@@ -62,28 +56,21 @@ class App extends Component{
       //iterate through and check if either history includes the array
       const [a, b, c] = value
       if(historyX.includes(a) && historyX.includes(b) && historyX.includes(c)){
-        let winner = true
+        let winner = "X"
+        let winMessage = "X's Win"
         this.setState({ winner: winner})
-        setTimeout(function () {
-          alert("X's Win!!")
-       }, 350)
+        this.setState({ winMessage: winMessage})
       } else if(historyO.includes(a) && historyO.includes(b) && historyO.includes(c)){
-        let winner = true
+        let winner = "O"
+        let winMessage = "O's Win"
         this.setState({ winner: winner})
-        setTimeout(function () {
-          alert("O's Win!!")
-       }, 350)
+        this.setState({ winMessage: winMessage})
+      } else if( winner === null && !squareArray.includes(" ")){
+        let winMessage = "There's a draw"
+        this.setState({ winMessage: winMessage})
       }
     })
   }
-
-  drawChecker = () => {
-    let { clickCounter } = this.state
-    if(clickCounter === 0){
-      
-    }
-  }
-
 
   // Restart page functionality
   restartButton = () =>{
@@ -91,7 +78,7 @@ class App extends Component{
   }
 
   render(){
-    let { squareArray } = this.state
+    let { squareArray, winMessage } = this.state
     let squares = squareArray.map((box, index) =>{
       return(
         <Square
@@ -105,13 +92,11 @@ class App extends Component{
     return(
       <React.Fragment>
         <h1>Tic Tac Toe</h1>
-    <div id="gameboard"> { squares }</div>
-    <Counter
-    counter = { this.state.clickCounter }
-    />
-    <Restart
-    restartButton = {this.restartButton}
-    />
+        <div id= "winMessage"> { winMessage} </div>
+        <div id="gameboard"> { squares }</div>
+        <Restart
+        restartButton = {this.restartButton}
+        />
       </React.Fragment>
     )
   }
