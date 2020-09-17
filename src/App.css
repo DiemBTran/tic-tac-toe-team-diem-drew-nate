@@ -1,15 +1,23 @@
 body{
   margin: 10px;
   text-align: center;
+  background: linear-gradient( to left, #3D5A80, #293241);
+  font-family: 'Baloo Tammudu 2', cursive;
+  background-size: cover;
 }
-
+h1{
+  color: #E0FBFC;
+  font-size: 50px;
+}
 #square{
+  font-size: 40px;
   height: 100px;
   width: 100px;
-  border: 1px solid black;
+  border: 1px solid #EE6C4D;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #E0FBFC;
 }
 
 #gameboard{
@@ -18,4 +26,19 @@ body{
   height: 306px;
   width: 306px;
   margin: 0 auto;
-  justify-content: center;}
+  justify-content: center;
+}
+#winMessage{
+  font-size: 35px;
+  color: #E0FBFC;
+}
+button{
+  margin: 20px;
+  padding: 3px;
+  padding-top: 7px;
+  border-radius: 20px;
+  font-size: 15px;
+  color: #E0FBFC;
+  background-color: #EE6C4D;
+  font-family: 'Baloo Tammudu 2', cursive;
+}

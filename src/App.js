@@ -25,12 +25,12 @@ class App extends Component{
     let { squareArray, xIsNext, historyO, historyX, clickCounter} = this.state
     if (squareArray[index] === " "){
       if (xIsNext === true) {
-        squareArray[index] = "𝐗"
+        squareArray[index] = "X"
         xIsNext = false
         historyX.push(index)
         console.log("This is X history", historyX);
       } else {
-        squareArray[index] = "𝐎"
+        squareArray[index] = "O"
         xIsNext = true
         historyO.push(index)
         console.log("This is O history", historyO);
@@ -39,7 +39,7 @@ class App extends Component{
     this.setState({ squareArray: squareArray})
     this.setState({ xIsNext: xIsNext})
   }
-  
+
   winChecker = (index) =>{
     let { historyX, historyO, winMessage, winner, squareArray } = this.state
     const winArrays = [
