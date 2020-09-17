@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 
 class Square extends Component{
   render(){
+    let { index } = this.props
     return(
       <React.Fragment>
-        <div id="square"></div>
+        <div id="square" onClick = { () => {this.props.marker(index)} }> 
+        {this.props.box}
+        </div>
       </React.Fragment>
     )
   }
