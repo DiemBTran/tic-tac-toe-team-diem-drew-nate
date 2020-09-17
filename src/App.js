@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import Square from './components/Square'
+import Restart from './components/Restart'
+import Counter from './components/Counter'
+
+
 import './App.css'
 
 class App extends Component{
@@ -9,12 +13,13 @@ class App extends Component{
       squareArray: [...Array(9).fill(" ")],
       xIsNext: true,
       historyO: [],
-      historyX: []
+      historyX: [],
+      clickCounter: 10
     }
   }
 
   marker = (index) =>{
-    let { squareArray, xIsNext, historyO, historyX } = this.state
+    let { squareArray, xIsNext, historyO, historyX, clickCounter} = this.state
     if (squareArray[index] === " "){
       if (xIsNext === true) {
         squareArray[index] = "X"
@@ -28,15 +33,20 @@ class App extends Component{
         console.log("This is O history", historyO);
       }
     }
+    clickCounter -= 1
+    this.setState({clickCounter: clickCounter})
+      console.log(clickCounter);
     this.setState({ squareArray: squareArray})
     this.setState({ xIsNext: xIsNext})
   }
-
+  restartButton = () =>{
+    window.location.reload()
+  }
   render(){
     let { squareArray } = this.state
     let squares = squareArray.map((box, index) =>{
       return(
-        <Square 
+        <Square
           box = { box }
           index = { index }
           key = { index }
@@ -48,6 +58,12 @@ class App extends Component{
       <React.Fragment>
         <h1>Tic Tac Toe</h1>
     <div id="gameboard"> { squares }</div>
+    <Counter
+    counter = { this.state.clickCounter }
+    />
+    <Restart
+    restartButton = {this.restartButton}
+    />
       </React.Fragment>
     )
   }
