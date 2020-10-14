@@ -23,8 +23,8 @@ h1{
 #gameboard{
   display: flex;
   flex-wrap: wrap;
-  height: 306px;
-  width: 306px;
+  height: 308px;
+  width: 308px;
   margin: 0 auto;
   justify-content: center;
 }

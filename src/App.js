@@ -22,7 +22,7 @@ class App extends Component{
   }
 
   marker = (index) =>{
-    let { squareArray, xIsNext, historyO, historyX, clickCounter} = this.state
+    let { squareArray, xIsNext, historyO, historyX} = this.state
     if (squareArray[index] === " "){
       if (xIsNext === true) {
         squareArray[index] = "X"
@@ -41,7 +41,7 @@ class App extends Component{
   }
 
   winChecker = (index) =>{
-    let { historyX, historyO, winMessage, winner, squareArray } = this.state
+    let { historyX, historyO, winner, squareArray } = this.state
     const winArrays = [
     [0, 1, 2],
     [3, 4, 5],
